@@ -1,0 +1,30 @@
+{
+  "name": "email_outreach_platform",
+  "version": "1.0.0",
+  "description": "email outreach platform with user authentication and dasboard",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SKiranFED9/email_outreach_platform.git"
+  },
+  "author": "kiran-FED",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SKiranFED9/email_outreach_platform/issues"
+  },
+  "homepage": "https://github.com/SKiranFED9/email_outreach_platform#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.12.0",
+    "mongoose": "^8.9.2",
+    "nodemon": "^3.1.9"
+  }
+}
