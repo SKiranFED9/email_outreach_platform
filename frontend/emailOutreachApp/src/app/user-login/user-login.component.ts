@@ -46,7 +46,7 @@ export class UserLoginComponent implements OnInit {
       this.http.post("http://localhost:5000/api/login", user, {
         withCredentials: true
       })
-        .subscribe(() => this.router.navigate(['/']), (err) => {
+        .subscribe(() => this.router.navigate(['/dashboard']), (err) => {
           Swal.fire("Error", err.error.message, "error")
         })
     }

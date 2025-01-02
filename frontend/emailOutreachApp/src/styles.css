@@ -1,1 +1,92 @@
 /* You can add global styles to this file, and also import other style files */
+.ngx-datatable .datatable-header {
+    text-transform: uppercase;
+    display: block;
+    overflow: hidden;
+    background-color: #0f5c74;
+    color: #fff;
+    text-align: center;
+  }
+  
+  .ngx-datatable.fixed-row
+    .datatable-scroll
+    .datatable-body-row
+    .datatable-body-cell,
+  .ngx-datatable.fixed-row
+    .datatable-scroll
+    .datatable-body-row
+    .datatable-body-group-cell {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: center;
+    padding-top: 13px;
+  }
+  
+  .ngx-datatable .datatable-header {
+    display: block;
+    overflow: hidden;
+    padding-top: 10px;
+  }
+  
+  /* .ngx-datatable.scroll-vertical {
+    height: 550px;
+  } */
+  
+  .ngx-datatable.scroll-vertical.virtualized
+    .datatable-body
+    .datatable-row-wrapper:nth-child(even) {
+    position: absolute;
+    background-color: rgb(233, 233, 233);
+  }
+  .ngx-datatable.fixed-header
+    .datatable-header
+    .datatable-header-inner
+    .datatable-header-cell {
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: normal !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+  }
+  .ngx-datatable *,
+  .ngx-datatable :after,
+  .ngx-datatable :before {
+    box-sizing: border-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .ngx-datatable.fixed-row .datatable-scroll,
+  .ngx-datatable.fixed-row .datatable-scroll .datatable-body-row {
+    white-space: nowrap;
+    border-bottom: 1px solid lightgray;
+  }
+  
+  .ngx-datatable .datatable-footer .datatable-footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    width: 100%;
+  }
+
+  .ngx-datatable .datatable-body .datatable-scroll {
+    display: inline-block;
+    border:1px solid #ccc;
+}
+  
+.empty-row {
+    text-align: center;
+    margin-top: 2vh;
+}
+  #per-page {
+    border: none;
+    border-bottom: 1px solid black;
+    width: 50px;
+    text-align: left;
+    outline: none;
+    margin-left: 5px;
+    cursor: pointer;
+  }
+  

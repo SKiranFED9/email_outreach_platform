@@ -1,1 +1,90 @@
-<p>{{message}}</p>
+<div class="row">
+    <div class="col-3 mb-3">
+        <h4 class="text-primary">File Upload : </h4>
+        <input type="file" class="form-control custFileWidth" (change)="readExeFile($event)">
+    </div>
+
+    <ngx-datatable class="bootstrap" [rows]="uploadUsers" [columnMode]="ColumnMode.force" [sortType]="sortType"
+        [headerHeight]="40" [footerHeight]="50" [rowHeight]="50" [reorderable]="true" [swapColumns]="false"
+        class="bootstrap" [limit]="5" [selected]="selected" [selectionType]="SelectionType.checkbox"
+        [selectAllRowsOnPage]="false" [displayCheck]="displayCheck" (activate)="onActivate($event)"
+        (select)="onSelect($event)">
+        <ngx-datatable-column [width]="50" [sortable]="false" [canAutoResize]="false" [draggable]="false"
+            [resizeable]="false" [headerCheckboxable]="true" [checkboxable]="true">
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Action">
+            <ng-template let-column="column" let-sort="sortFn" let-sortDir="sortDir" ngx-datatable-header-template>
+                <span></span>
+            </ng-template>
+            <ng-template let-row="row" let-value="value" let-rowIndex="rowIndex" let-sort="sortFn" let-sortDir="sortDir"
+                ngx-datatable-cell-template>
+                <div class="form-group">
+                    <span title="Edit" *ngIf="!isEditable[rowIndex]">
+                    <button class="btn btn-primary btn-sm" (click)="enableEdit(rowIndex)" style="margin-right:1em;width: 7vh;">Edit</button>
+                </span>
+                <span title="Edit" *ngIf="!isEditable[rowIndex]">
+                    <button class="btn btn-danger btn-sm" (click)="onDelete(rowIndex)">Delete</button>
+                </span>
+                <span *ngIf="isEditable[rowIndex]">
+                    <span title="Save">
+                        <button  class="btn btn-success btn-sm" (click)="onSave(rowIndex, value)" style="margin-right:1em;width: 7vh;">Save</button>
+                    </span>
+                    <span title="Cancel">
+                        <button  class="btn btn-danger btn-sm" (click)="onCancel(rowIndex)">Cancel</button>
+                    </span>
+                </span>
+                </div>
+                
+            </ng-template>
+        </ngx-datatable-column>
+        <ng-container *ngFor="let user of usersHeader" style="padding-bottom: 10px;">
+            <ngx-datatable-column name="user.label" title="user.label" [prop]="user.field" [cellClass]="color">
+                <ng-template let-column="column" let-sort="sortFn" let-sortDir="sortDir" ngx-datatable-header-template>
+                    <span style="display: block" (click)="sort()" [title]="user.label">{{
+                        user.label
+                        }}</span>
+                </ng-template>
+                <ng-template let-row="row" let-value="value" let-sort="sortFn" let-rowIndex="rowIndex"
+                    ngx-datatable-cell-template>
+                    <span *ngIf="isEditable[rowIndex]">
+                        <span *ngIf="isEditable[rowIndex]">
+                            <span *ngIf="
+                                user.isEdit &&
+                                (user.field === 'phoneNo' ||
+                                  user.field === 'email' ||
+                                  user.field === 'name')
+                              " >
+                                <input type="text" style="border: 1px solid #ccc;margin-left: 2em;padding-left: 1em;" [(ngModel)]="row[user.field]" />
+                            </span>
+                            <span *ngIf="
+                                !(
+                                  user.isEdit &&
+                                  (user.field === 'phoneNo' ||
+                                    user.field === 'email' ||
+                                    user.field === 'name')
+                                )
+                              ">
+                                {{ value }}
+                            </span>
+                        </span>
+                    </span>
+                    <span *ngIf="!isEditable[rowIndex]">{{ value }}</span>
+                </ng-template>
+            </ngx-datatable-column>
+        </ng-container>
+    </ngx-datatable>
+
+    <div class="selected-column">
+        <h4>
+            Selections <small>({{ selected?.length }})</small>
+        </h4>
+        <ul>
+            <li *ngFor="let sel of selected">
+                {{ sel.email | json }}
+            </li>
+            <li *ngIf="!selected?.length">No Selections</li>
+        </ul>
+    </div>
+
+</div>
