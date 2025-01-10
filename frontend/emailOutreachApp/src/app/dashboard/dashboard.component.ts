@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Emitters } from '../emitters/emitter';
 import * as xls from 'xlsx';
@@ -60,6 +60,8 @@ export class DashboardComponent implements OnInit {
 
   rows = [];  
   usersHeader = users;
+  authenticated: boolean;
+  user = { id : 1, name : 'Hello'};
 
   constructor(
     private http: HttpClient
@@ -68,6 +70,10 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    Emitters.authEmitter.subscribe((auth:boolean) => {
+      console.log(auth)
+      this.authenticated = auth
+    })
     this.http
     .get('http://localhost:5000/api/user', {
       withCredentials: true
@@ -107,6 +113,19 @@ export class DashboardComponent implements OnInit {
       this.rows = this.uploadUsers;
 
     }
+  }
+
+  callServer() {
+    const headers = new HttpHeaders()
+          .set('Authorization', 'my-auth-token')
+          .set('Content-Type', 'application/json');
+
+    this.http.post('http://localhost:5000/sendmail', JSON.stringify(this.user), {
+      headers: headers
+    })
+    .subscribe(data => {
+      console.log(data);
+    });
   }
 
   //@ts-ignore
